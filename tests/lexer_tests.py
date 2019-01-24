@@ -20,6 +20,21 @@ def Comments_are_ignored():
 
 
 @test
+def Comments_are_compatible_with_code():
+    assert_that(
+        lexed("# this is a comment\n a=2;"), 
+        equals(
+            [
+                ("symbol", "a"),
+                ("=", ""),
+                ("number", "2"),
+                (";", "")
+            ]
+        )
+    )
+
+
+@test
 def Empty_file_produces_nothing():
     assert_that(lexed(""), equals([]))
 
